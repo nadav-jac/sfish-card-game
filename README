@@ -1,0 +1,25 @@
+# Game Rules Description
+Based on the code, here are the inferred rules for your card game:
+
+## Game Setup
+The game is played with a deck of cards, where each card has a suit (Diamond, Club, Heart, or Spade) and a rank (1 to max_rank, default 13).
+There are multiple players, and the game is divided into several sets (the default is 10 sets).
+At the start of each set, the deck is reset, and a "strong suit" is chosen randomly.
+Players start with an empty hand and no guesses or set wins.
+Gameplay
+Each player is dealt a number of cards equal to the current set index.
+Before playing, players must guess how many sets they expect to win, given the strong suit.
+Players take turns playing cards into a central board area. The order in which players play is determined by the set index.
+Players try to win hands by playing the highest card in the strong suit or the highest card in the leading suit if no strong suit card is played.
+Each set consists of a number of hands equal to the set index.
+After all hands in a set are played, the player with the most hands won in that set is declared the winner of that set.
+Scoring
+Points are awarded based on how accurately a player guesses the number of sets they will win.
+If a player's guess is correct, they receive points equal to the set index plus the number of sets won.
+If their guess is incorrect, they lose points based on the difference between their guess and the actual number of sets won.
+End of Game
+The game consists of several sets, and players accumulate points across these sets.
+The player with the highest total score at the end of all sets is the winner of the game.
+
+## Similar Games
+This game resembles the card game Oh Hell or Wizard, where players must predict the number of tricks they will take and earn points based on the accuracy of their predictions. Like in your game, players are dealt a number of cards that changes each round, and there's a focus on predicting and managing the cards based on the strong suit.
