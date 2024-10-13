@@ -1,6 +1,10 @@
-from sfish.game.cards import Card, CardSuit
-from sfish.game.board import Board
-from sfish.user_interface.player_ui import PlayerUI
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from sfish.user_interface.player_ui import PlayerUI
+    from sfish.game.cards import Card, CardSuit
+    from sfish.game.board import Board  # Only import for type hints
 
 
 class Player:
