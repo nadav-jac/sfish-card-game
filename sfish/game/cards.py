@@ -11,6 +11,12 @@ class CardSuit(Enum):
 
 N_SUITS = len(list(CardSuit))
 
+def get_suit_from_str(suit_str: str) -> CardSuit:
+    for suit in CardSuit:
+        if suit_str == suit.value:
+            return suit
+    raise ValueError("Invalid suit string.")
+
 class Card:
     def __init__(self, suit: CardSuit, rank):
         assert rank > 0, "Rank must be a positive integer."
@@ -18,11 +24,14 @@ class Card:
         self.rank = rank
 
     def __repr__(self):
-        return f"{self.rank} of {self.suit}"
+        return f"{self.rank} {self.suit.value}"
     
+    def __eq__(self, __value: object) -> bool:
+        return isinstance(__value, Card) and self.suit == __value.suit and self.rank == __value.rank
+
     @classmethod
     def from_str(cls, card_str: str) -> "Card":
-        pass
+        return cls(CardSuit(get_suit_from_str(card_str.split()[1])), int(card_str.split()[0]))
 
 
 

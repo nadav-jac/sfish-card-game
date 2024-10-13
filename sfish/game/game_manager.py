@@ -153,4 +153,4 @@ def select_strong_suit() -> CardSuit:
     Returns:
         CardSuit: The selected strong suit.
     """
-    random.choice(list(CardSuit))
+    return random.choice(list(CardSuit))

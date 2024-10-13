@@ -46,7 +46,7 @@ class Board:
         Returns:
             Player: The player who won the hand.
         """
-        leading_suit = self.played_cards[0].suit
+        leading_suit = self.hand_leading_suit
         winning_card = self.played_cards[0]
         winning_player = self.played_by[0]
 
@@ -72,3 +72,25 @@ class Board:
             Player: The player who won the hand.
         """
         return self.determine_hand_winner()
+    
+    @property
+    def hand_leading_suit(self) -> Optional[CardSuit]:
+        """
+        Property to get the suit of the leading card in the hand.
+
+        Returns:
+            CardSuit: The suit of the leading card.
+        """
+        return self.played_cards[0].suit if self.played_cards else None
+    
+    @property
+    def state(self) -> str:
+        """
+        Property to get the current state of the board.
+
+        Returns:
+            str: A string representation of the board state.
+        """
+        cards_played_by = [f"{player.name}: {card}" for player, card in zip(self.played_by, self.played_cards)]
+        return f"{cards_played_by}." if self.played_cards else "No cards played yet."
+    

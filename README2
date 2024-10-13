@@ -1,0 +1,42 @@
+Project Name: Simple Fish Card Game
+Description
+Simple Fish Card Game is a Python-based card game where players compete to predict the number of tricks they can win in each round. This game is inspired by classic trick-taking games like Oh Hell and Wizard, where players need to carefully manage their cards and strategically make guesses to maximize their scores.
+
+Features
+Dynamic Gameplay: The game is played in multiple sets, with each set having an increasing number of cards dealt to players.
+Strategic Guessing: Players make predictions about the number of tricks they will win and score points based on the accuracy of their guesses.
+Strong Suit Mechanics: Each set features a randomly selected strong suit that can influence the outcome of each hand.
+Interactive Player Interface: A player UI allows for easy interaction and decision-making.
+Modular Design: The game is designed with modular classes for cards, players, deck, and game management, making it easy to extend or modify.
+Installation
+Clone the repository:
+
+bash
+Copy code
+git clone https://github.com/yourusername/simple-fish-card-game.git
+cd simple-fish-card-game
+Install dependencies:
+
+Ensure you have Python 3.x installed. This project does not currently use any third-party libraries, but you may add dependencies as needed.
+
+How to Play
+Run the game manager script:
+
+bash
+Copy code
+python sfish/game/game_manager.py
+Follow the on-screen prompts to input your name and interact with the game.
+
+Make strategic guesses and play your cards to win hands and maximize your score.
+
+Future Enhancements
+Implement a graphical user interface (GUI) for a more immersive experience.
+Add support for multiplayer online play.
+Introduce additional card suits and ranks for more complex gameplay.
+Include AI opponents with varying difficulty levels.
+Contributing
+Contributions are welcome! Please fork the repository and submit a pull request with your changes. Make sure to follow the project's coding guidelines and provide clear documentation for any new features.
+
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
