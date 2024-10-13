@@ -5,7 +5,9 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "sfish"
 version = "0.0.1"
-dependencies = []
+dependencies = [
+    "python-telegram-bot>=20.0",
+]
 python = ">=3.11"
 
 [project.optional-dependencies]
