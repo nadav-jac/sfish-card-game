@@ -1,12 +1,21 @@
 import os
+import asyncio
+import logging
 from telegram import Update
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler
+
 from sfish.game.cards import Deck
 from sfish.game.board import Board
 from sfish.game.game_manager import GameManager
 from sfish.game.player import Player
 from sfish.user_interface.telegram_player_ui import TelegramPlayerUI
 from sfish.telegram_utils.inline_buttons import button_callback
+
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
+logger = logging.getLogger(__name__)
 
 # Store game sessions by chat ID
 active_games = {}
@@ -21,7 +30,6 @@ async def start(update: Update, context):
     else:
         pending_players[chat_id] = []
         await update.message.reply_text("Game created. Waiting for players to join with /join.")
-
 
 # Function for players to join the game
 async def join(update: Update, context):
@@ -41,7 +49,6 @@ async def join(update: Update, context):
         # If enough players have joined, start the game
         if len(pending_players[chat_id]) >= 4:
             await start_game(update, context)
-
 
 async def start_game(update: Update, context):
     chat_id = update.message.chat_id
@@ -68,7 +75,6 @@ async def start_game(update: Update, context):
     await update.message.reply_text("All players have joined. The game is starting!")
     game_manager.run_game()  # Run the full game logic
 
-
 async def main():
     # Set up the Telegram bot
     telegram_bot_token = os.getenv("SFISH_TELEGRAM_BOT_TOKEN")
@@ -84,8 +90,35 @@ async def main():
     application.add_handler(CallbackQueryHandler(button_callback))
 
     # Start polling
-    await application.run_polling()
+    logger.info("Initializing bot...")
+    await application.initialize()
+    
+    logger.info("Starting bot...")
+    await application.start()
+    
+    logger.info("Starting polling...")
+    await application.updater.start_polling()
+
+    logger.info("Bot is running. Waiting for updates...")
+
+    # Keep the bot running indefinitely
+    await asyncio.Event().wait()
 
 if __name__ == "__main__":
-    import asyncio
-    asyncio.run(main())
+    try:
+        # Try to get the running event loop
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        # No event loop is running, create a new one
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
+    if loop.is_running():
+        # If there's an existing event loop, use it
+        logger.info("Using existing event loop")
+        # Run the bot using the current event loop
+        task = loop.create_task(main())
+    else:
+        # If no event loop is running, create a new one
+        logger.info("Starting new event loop")
+        asyncio.run(main())
