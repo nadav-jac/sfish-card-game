@@ -9,6 +9,8 @@ class CardSuit(Enum):
     Spade = "♠"
 
 
+N_SUITS = len(list(CardSuit))
+
 class Card:
     def __init__(self, suit: CardSuit, rank):
         assert rank > 0, "Rank must be a positive integer."

@@ -1,7 +1,10 @@
 
-from sfish.game.cards import Card, CardSuit
-from sfish.game.player import Player
-from typing import List, Optional
+from __future__ import annotations
+from typing import List, Optional, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from sfish.game.cards import Card, CardSuit
+    from sfish.game.player import Player
 
 class Board:
     """
